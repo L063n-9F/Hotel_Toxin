@@ -37,7 +37,7 @@ module.exports = {
       filename: './css/[name].[contenthash].css'
     }),
   ]
-    .concat(HTMLtemples),
+      .concat(HTMLtemples),
   module: {
     rules: [
       {
@@ -48,7 +48,7 @@ module.exports = {
           },
           {
             loader: 'pug-html-loader',
-            options: { pretty: true },
+            options: {pretty: true},
           }
         ]
       },
