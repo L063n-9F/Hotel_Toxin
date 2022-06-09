@@ -1,9 +1,20 @@
 extends ../../pages-structure/foundation/foundation
 
+block variables
+  -
+    const title = "Навигация по страницам проекта"
+    const description = "Страница содержит ссылки на все страницы проекта и UI-kit отеля"
+    const keywords = "навигация, содержимое, ссылки"
+
 block main
-  p Навигация по всем страницам Hotel Toxin
-    ul
+  .index
+    h1 Index Hotel Toxin
+    .index__site-pages
+      h2 Site pages
+      ul
       li
         a(href="/header.html") Header
       li
         a(href="/footer.html") Footer
+    .index__ui-kit-pages
+      h2 UI-kit pages
