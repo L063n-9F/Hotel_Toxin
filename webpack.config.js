@@ -9,7 +9,7 @@ const entryPoints = PAGES_PATHS.reduce((accum, current) => {
   accum[current] = PAGES_DIR + '/' + current + '/' + current + '.js';
   return accum;
 }, {});
-const HTMLtemples = PAGES_PATHS.map(item => {
+const HTML_templates = PAGES_PATHS.map(item => {
   return new HtmlWebpackPlugin({
     filename: item + '.html',
     template: PAGES_DIR + '/' + item + '/' + item + '.pug',
@@ -37,20 +37,15 @@ module.exports = {
       filename: './css/[name].[contenthash].css'
     }),
   ]
-      .concat(HTMLtemples),
+      .concat(HTML_templates),
   module: {
     rules: [
       {
         test: /\.pug$/,
-        use: [
-          {
-            loader: 'html-loader'
-          },
-          {
-            loader: 'pug-html-loader',
-            options: {pretty: true},
-          }
-        ]
+        loader: 'pug-loader',
+        options: {
+          pretty: true,
+        },
       },
       {
         test: /\.css$/i,
@@ -84,13 +79,6 @@ module.exports = {
           filename: './assets/favicons/[contenthash][ext]'
         },
       },
-      {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        }
-      }
     ],
   },
 };
