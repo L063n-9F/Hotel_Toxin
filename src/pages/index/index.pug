@@ -1,20 +1,16 @@
 extends ../../pages-structure/foundation/foundation
+include ../../blocks/index-list/index-list
 
 block variables
   -
-    const title = "Навигация по страницам проекта"
-    const description = "Страница содержит ссылки на все страницы проекта и UI-kit отеля"
-    const keywords = "навигация, содержимое, ссылки"
+    const title = "Навигация по страницам проекта";
+    const description = "Ссылки на вэб и ui-kit страницы приложения отеля";
+    const keywords = "навигация, содержимое, ссылки";
+    const obj = require("./data.json");
+    const {webList, uiList} = obj;
 
-block main
+append main
+
   .index
-    h1 Index Hotel Toxin
-    .index__site-pages
-      h2 Site pages
-      ul
-      li
-        a(href="/header.html") Header
-      li
-        a(href="/footer.html") Footer
-    .index__ui-kit-pages
-      h2 UI-kit pages
+    +index-list(webList)
+    +index-list(uiList)
