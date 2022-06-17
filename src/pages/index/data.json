@@ -1,0 +1,50 @@
+{
+  "webList": {
+    "class": "index__webList",
+    "description": "Вэб страницы приложения Отеля Toxin",
+    "links": [
+      {
+        "href": "/registration.html",
+        "text": "Registration"
+      },
+      {
+        "href": "/sign-in.html",
+        "text": "Sign-in"
+      },
+      {
+        "href": "/room-details.html",
+        "text": "Room details"
+      },
+      {
+        "href": "/search-room.html",
+        "text": "Search room"
+      },
+      {
+        "href": "/landing-page.html",
+        "text": "Landing page"
+      }
+    ]
+  },
+  "uiList": {
+    "class": "index__uiList",
+    "description": "Cтраницы UI-kit",
+    "links": [
+      {
+        "href": "/colors-and-type.html",
+        "text": "Colors and type"
+      },
+      {
+        "href": "/form-elements.html",
+        "text": "Form elements"
+      },
+      {
+        "href": "/cards.html",
+        "text": "Cards"
+      },
+      {
+        "href": "headers-and-footers.html",
+        "text": "Headers and footers"
+      }
+    ]
+  }
+}
