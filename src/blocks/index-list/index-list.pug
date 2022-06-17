@@ -1,0 +1,9 @@
+mixin index-list(options)
+  -
+    const {} = options;
+
+  h2.index__title= options.description
+  ul(class="" + options.class)
+    each item in options.links
+      li.index__item
+        a.index__link(href = item.href)= item.text
