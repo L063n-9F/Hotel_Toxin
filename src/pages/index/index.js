@@ -1,2 +1,2 @@
-import '../../pages-structure/foundation/foundation.pug'
+import '../../layout/ui-kit-page/ui-kit-page.pug'
 import '../../blocks/index-list/index-list.pug'
