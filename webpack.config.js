@@ -3,10 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const fs = require('fs')
 
+const isDev = process.env.NODE_ENV === 'development';
+const isProd = !isDev;
+
+const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
+
 const PAGES_DIR = path.resolve(__dirname, 'src/pages');
 const PAGES_PATHS = fs.readdirSync(path.resolve(__dirname, 'src/pages'));
 const entryPoints = PAGES_PATHS.reduce((accum, current) => {
-  accum[current] = PAGES_DIR + '/' + current + '/' + current + '.js';
+  accum[current] = PAGES_DIR + '/' + current + '/' + 'index.js';
   return accum;
 }, {});
 const HTML_templates = PAGES_PATHS.map(item => {
@@ -20,9 +25,10 @@ const HTML_templates = PAGES_PATHS.map(item => {
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
+  mode: 'development',
   entry: entryPoints,
   output: {
-    filename: './js/[name].[contenthash].js',
+    filename: `./js/${filename('js')}`,
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     clean: true,

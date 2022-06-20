@@ -1,19 +1,4 @@
 extends ../../layout/ui-kit-page/ui-kit-page
-include ../../blocks/color-sample/color-sample
-
-append variables
-  -
-    const title = "Colors-and-type";
-    const description = "Примеры используемых цветов, шрифта и заголовков";
-    const keywords = "цвета, заголовки, шрифт";
-    const data = require("./data.json");
-    const {colorSample, textSample} = data;
 
 append main
-
-  .color-and-type
-    .color-and-type__color-list
-      .color-sample
-        +color-sample(colorSample)
-    .color-and-type__text-list
-      .text-sample
+  p Проверка сборки

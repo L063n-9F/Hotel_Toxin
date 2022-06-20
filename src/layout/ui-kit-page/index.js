@@ -1,3 +1,2 @@
-import '../base'
-import '../../blocks/logo'
-import './ui-kit-page.styl'
+import '../base/base.pug'
+import '../../blocks/logo/logo.pug'
