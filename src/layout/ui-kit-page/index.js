@@ -1,2 +1,2 @@
-import '../base/base.pug'
+import '../base'
 import '../../blocks/logo/logo.pug'
