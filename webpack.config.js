@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const fs = require('fs')
+const glob = require("glob");
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
@@ -9,11 +10,14 @@ const isProd = !isDev;
 const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
 
 const PAGES_DIR = path.resolve(__dirname, 'src/pages');
+
 const PAGES_PATHS = fs.readdirSync(path.resolve(__dirname, 'src/pages'));
+
 const entryPoints = PAGES_PATHS.reduce((accum, current) => {
   accum[current] = PAGES_DIR + '/' + current + '/' + 'index.js';
   return accum;
 }, {});
+
 const HTML_templates = PAGES_PATHS.map(item => {
   return new HtmlWebpackPlugin({
     filename: item + '.html',
@@ -24,13 +28,13 @@ const HTML_templates = PAGES_PATHS.map(item => {
 });
 
 module.exports = {
+  devtool: 'eval',
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
   entry: entryPoints,
   output: {
     filename: `./js/${filename('js')}`,
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
     clean: true,
   },
 
@@ -40,7 +44,7 @@ module.exports = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: './css/[name].[contenthash].css'
+      filename: `./css/${filename('css')}`
     }),
   ]
       .concat(HTML_templates),
@@ -55,7 +59,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.styl$/,
