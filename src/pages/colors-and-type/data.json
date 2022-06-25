@@ -2,45 +2,45 @@
   "colorSample": [
     {
       "pallet": "c1",
-      "color": "#1f2041",
-      "title": "dark shade 100%",
-      "description": "#1f2041"
+      "color": "#1F2041",
+      "title": "Dark Shade 100%",
+      "description": "#1F2041"
     },
     {
       "pallet": "c2",
       "color": "rgba(31, 32, 65, 0.75)",
-      "title": "dark shade 75%",
-      "description": "#1f2041"
+      "title": "Dark Shade 75%",
+      "description": "#1F2041"
     },
     {
       "pallet": "c3",
       "color": "rgba(31, 32, 65, 0.5)",
-      "title": "dark shade 50%",
-      "description": "#1f2041"
+      "title": "Dark Shade 50%",
+      "description": "#1F2041"
     },
     {
       "pallet": "c4",
       "color": "rgba(31, 32, 65, 0.25)",
-      "title": "dark shade 25%",
-      "description": "#1f2041"
+      "title": "Dark Shade 25%",
+      "description": "#1F2041"
     },
     {
       "pallet": "c5",
       "color": "rgba(31, 32, 65, 0.05)",
-      "title": "dark shade 5%",
-      "description": "#1f2041"
+      "title": "Dark Shade 5%",
+      "description": "#1F2041"
     },
     {
       "pallet": "c6",
-      "color": "#dc9Cff",
-      "title": "purple",
-      "description": "#bc9cff"
+      "color": "#BC9CFF",
+      "title": "Purple",
+      "description": "##BC9CFF"
     },
     {
       "pallet": "c7",
-      "color": "#6fcf97",
-      "title": "green",
-      "description": "#6fcf97"
+      "color": "#6FCF97",
+      "title": "Green",
+      "description": "#6FCF97"
     }
   ],
   "textSample": [
