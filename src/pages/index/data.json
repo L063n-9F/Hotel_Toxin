@@ -4,23 +4,23 @@
     "description": "Вэб страницы приложения Отеля Toxin",
     "links": [
       {
-        "href": "/registration.html",
+        "href": "registration.html",
         "text": "Registration"
       },
       {
-        "href": "/sign-in.html",
+        "href": "sign-in.html",
         "text": "Sign-in"
       },
       {
-        "href": "/room-details.html",
+        "href": "room-details.html",
         "text": "Room details"
       },
       {
-        "href": "/search-room.html",
+        "href": "search-room.html",
         "text": "Search room"
       },
       {
-        "href": "/landing-page.html",
+        "href": "landing-page.html",
         "text": "Landing page"
       }
     ]
@@ -30,15 +30,15 @@
     "description": "Cтраницы UI-kit",
     "links": [
       {
-        "href": "/colors-and-type.html",
+        "href": "colors-and-type.html",
         "text": "Colors and type"
       },
       {
-        "href": "/form-elements.html",
+        "href": "form-elements.html",
         "text": "Form elements"
       },
       {
-        "href": "/cards.html",
+        "href": "cards.html",
         "text": "Cards"
       },
       {
