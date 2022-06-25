@@ -1,0 +1,9 @@
+mixin color-sample(options={})
+  -
+    const {} = options;
+
+  each item in options
+    div(class="color-sample__pallet" + " " + "color-sample__pallet_" + item.pallet)
+    .color-sample__text
+      h2(class= 'color-sample__color_title')= item.title
+      p(class= 'color-sample__color_description')= item.description
