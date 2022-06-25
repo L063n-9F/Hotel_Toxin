@@ -1,1 +1,1 @@
-import '../base/base.pug'
+import '../base'

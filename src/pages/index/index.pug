@@ -1,13 +1,13 @@
 extends ../../layout/ui-kit-page/ui-kit-page
 include ../../blocks/index-list/index-list
 
-block variables
+append variables
   -
     const title = "Навигация по страницам проекта";
     const description = "Ссылки на вэб и ui-kit страницы приложения отеля";
     const keywords = "навигация, содержимое, ссылки";
-    const obj = require("./data.json");
-    const {webList, uiList} = obj;
+    const data = require("./data.json");
+    const {webList, uiList} = data;
 
 append main
 
