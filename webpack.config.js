@@ -1,17 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const fs = require('fs')
-const glob = require("glob");
-
-const isDev = process.env.NODE_ENV === 'development';
-const isProd = !isDev;
-
-const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
 
 const PAGES_DIR = path.resolve(__dirname, 'src/pages');
-
-const PAGES_PATHS = fs.readdirSync(path.resolve(__dirname, 'src/pages'));
+const PAGES_PATHS = fs.readdirSync(PAGES_DIR);
 
 const entryPoints = PAGES_PATHS.reduce((accum, current) => {
   accum[current] = PAGES_DIR + '/' + current + '/' + 'index.js';
@@ -27,68 +21,93 @@ const HTML_templates = PAGES_PATHS.map(item => {
   })
 });
 
-module.exports = {
-  devtool: 'eval',
-  context: path.resolve(__dirname, 'src'),
-  mode: 'development',
-  entry: entryPoints,
-  output: {
-    filename: `./js/${filename('js')}`,
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-  },
+module.exports = (env) => {
+  const isDev = Boolean(env.development);
+  const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
+  const baseConfig = {
+    context: path.resolve(__dirname, 'src'),
+    entry: entryPoints,
+    performance: {
+      maxAssetSize: 5000000,
+    },
+    output: {
+      filename: `./js/${filename('js')}`,
+      path: path.resolve(__dirname, 'dist'),
+      clean: true,
+    },
 
-  devServer: {
-    port: 4200
-  },
-
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: `./css/${filename('css')}`
-    }),
-  ]
-      .concat(HTML_templates),
-  module: {
-    rules: [
-      {
-        test: /\.pug$/,
-        loader: 'pug-loader',
-        options: {
-          pretty: true,
-        },
-      },
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        test: /\.styl$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-          },
-          {
-            loader: "stylus-loader",
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpe?g)$/i,
-        type: 'asset/resource',
-        exclude: /favicons/,
-        generator: {
-          filename: './assets/images/[contenthash][ext]'
-        },
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg|ico|webmanifest|xml)$/i,
-        type: 'asset/resource',
-        exclude: /images/,
-        generator: {
-          filename: './assets/favicons/[contenthash][ext]'
-        },
-      },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: `./css/${filename('css')}`
+      }),
+      ...HTML_templates,
+      new CopyPlugin({
+        patterns: [
+          { from: "./assets/favicons", to: "assets/favicons" },
+        ]}),
     ],
-  },
+
+    module: {
+      rules: [
+        {
+          test: /\.pug$/,
+          loader: 'pug-loader',
+          options: {
+            pretty: true,
+          },
+        },
+        {
+          test: /\.css$/i,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.styl$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+            },
+            {
+              loader: "stylus-loader",
+            }
+          ]
+        },
+        {
+          test: /\.(woff|ttf|svg)$/i,
+          type: 'asset/resource',
+          exclude: /img/,
+          generator: {
+            filename: './assets/fonts/[name][ext]'
+          },
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)$/i,
+          type: 'asset/resource',
+          exclude: /fonts/,
+          generator: {
+            filename: './assets/img/[name].[contenthash][ext]'
+          },
+        },
+      ],
+    },
+  };
+  const devConfig = {
+    mode: 'development',
+    devtool: 'source-map',
+    devServer: {
+      port: 4200,
+      open: '/index.html',
+    },
+    ...baseConfig,
+  };
+  const prodConfig = {
+    mode: 'production',
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
+    ...baseConfig,
+  };
+  return (isDev) ? devConfig : prodConfig;
 };
